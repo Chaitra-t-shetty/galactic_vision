@@ -1,0 +1,240 @@
+body{
+    background-color: rgb(88, 120, 217);
+}
+
+
+/* STYLING FOR NAVBAR */
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-rocket{
+    color : blue;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color:#222222 !important;
+}
+
+
+/* STYLING FOR FOOTERSS */
+/* remove links default underline */
+.f-info-links a{
+    text-decoration: none;
+    color: #222222;
+}
+.f-info-links{
+    width: 100%;
+}
+.f-info-socials{
+    width: 100%;
+}
+.f-info-socials i{
+    color: black;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+.f-info{
+    text-align: center;
+    height : 8rem;
+    display: flex;   /*everything in same line*/
+    background-color: #ebebeb;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items : space-evenly;
+    color: #0d1b2a;
+}
+
+
+/* Styling for my cardss */
+.allPlanet{
+    background-color: #0d1b2a !important; /* Dark space theme */
+    color: #ffffff !important; /* White text */
+    text-align: center !important; /* Centers heading & paragraph */
+}
+
+/* -------- HEADING STYLING -------- */
+.allPlanet h2 {
+    margin-top: 2rem !important;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.allPlanet p {
+    font-size: 1.1rem;
+    color: #dcdcdc ;
+    margin-bottom: 2rem;
+}
+
+/* -------- CARD GRID CONTAINER -------- */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers cards */
+    gap: 0rem; /* Adds spacing between cards */
+    padding-bottom: 1.5rem;
+}
+
+/* -------- CARD DESIGN -------- */
+.card {
+    width: 18rem; /* Adjusted width */
+    height: 21.4rem !important; /* Uniform height */
+    border: none !important;
+    background-color: #162744 !important;
+    border-radius: 1rem;
+    text-align: center;
+    overflow: hidden; /* Prevents content overflow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Subtle glow effect */
+    padding: 1rem;
+}
+
+/* Hover Effect */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3);
+}
+
+/* Card Image */
+.card-img-top {
+    width: 100%;
+    height: 8rem; /* Consistent image height */
+    object-fit: cover !important;
+    border-radius: 1rem !important;
+}
+
+/* Card Body */
+.card-body {
+    padding: 0.5rem !important;
+    color: #ffffff;
+}
+
+/* Title inside card */
+.card-body h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+    color: #f8f9fa;
+}
+
+/* Description inside card */
+.card-body p {
+    font-size: 0.9rem;
+    color: #dcdcdc;
+}
+
+/* -------- RESPONSIVE DESIGN -------- */
+@media (max-width: 992px) {
+    .row {
+        gap: 1.5rem;
+    }
+    .card {
+        width: 16rem;
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 90%;
+        height: auto;
+    }
+}
+
+
+/* SHOW PLANETS STORY */
+/* Story Container */
+.story-container {
+    background-color: #1c3b5f;
+    padding: 20px !important;
+    border-radius: 12px !important;
+    width: 80% !important;
+    max-width: 1000px !important;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) ;
+    margin: 50px auto !important; /* Ensures it's centered */
+}
+
+/* Story Title */
+.story-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Story Content */
+.story-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: left;
+    padding: 20px;
+    background: rgba(187, 205, 239, 0.874);
+    border-radius: 10px;
+}
+
+/* Action Buttons */
+.story-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 20px !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease-in-out !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+}
+
+/* Secondary Button (Back to Listings) */
+.btn-secondary {
+    background-color: #ffcc00 !important;
+    color: #000 !important;
+}
+
+.btn-secondary:hover {
+    background-color: #e6b800 !important;
+}
+
+/* Primary Button (Take Quiz) */
+.btn-primary {
+    background-color: #007bff !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .story-container {
+        width: 90%;
+        padding: 20px;
+    }
+    .story-title {
+        font-size: 1.8rem;
+    }
+    .story-content {
+        font-size: 1rem;
+    }
+    .btn {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+}
+

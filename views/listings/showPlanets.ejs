@@ -1,0 +1,20 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+<body class="planet">
+    <div class="container story-container">
+        <header>
+            <h1 class="story-title"><%= story.title %></h1>
+        </header>
+        
+        <section class="story-content">
+            <p><%= story.content %></p>
+        </section>
+        <div class="story-actions">
+            <a href="/listings" class="btn btn-secondary">Back to Listings</a>
+            <a href="/quiz/<%= encodeURIComponent(story.listing.title) %>" class="btn btn-primary">Take Quiz</a>
+        </div>
+        
+    </div>
+   
+
+</ul>
+</body>
