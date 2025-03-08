@@ -7,6 +7,9 @@ const Story = require("./models/story.js");
 const Quiz = require("./models/quiz.js")
 const path = require('path');
 const ejsMate = require('ejs-mate');
+const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
+
 main()
     .then(()=>{
         console.log("connection successfull");
@@ -38,22 +41,22 @@ app.get("/links",(req,res)=>{
 });
 
 //Index Route
-app.get("/listings",async (req,res)=>{
+app.get("/listings",wrapAsync(async(req,res)=>{
     const allListings = await Listing.find({});
     res.render("listings/allPlanets.ejs",{allListings});
-});
+}));
+
 
 //show Route
-app.get("/listings/:_id",async (req,res)=>{
+app.get("/listings/:_id",wrapAsync( async (req,res)=>{
     let{_id} = req.params;
     //in that ejs i am using listing ryt so populate
     const story = await Story.findOne({ listing: _id }).populate("listing");
     res.render("listings/showPlanets.ejs",{story});
-});
+}));
 
 //Quiz Route
-app.get("/quiz/:category", async (req, res) => {
-    try {
+app.get("/quiz/:category",wrapAsync(async (req, res)=> {
         let { category } = req.params;
         category = decodeURIComponent(category);
         const quizQuestions = await Quiz.find({ category: category }); // Fetch all questions in the category
@@ -61,14 +64,18 @@ app.get("/quiz/:category", async (req, res) => {
         if (quizQuestions.length === 0) {
             return res.status(404).send("Quiz not found");
         }
-
         res.render("listings/quizPage", { quizQuestions, category });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Internal Server Error");
-    }
+}));
+
+app.all("*",(req,res,next)=>{
+    next(new ExpressError(404,"Page Not Found"));
 });
 
+app.use((err,req,res,next)=>{
+    let {statusCode=500 , message="Something went wrong"} = err;
+    res.render("error.ejs" , {message});
+    // res.status(statusCode).send(message);
+})
 app.listen(port , ()=>{
     console.log('Listening on port', port);
 })
