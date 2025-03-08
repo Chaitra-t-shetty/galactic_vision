@@ -9,6 +9,7 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const session = require("express-session");
 
 main()
     .then(()=>{
@@ -27,6 +28,18 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, "/public")));
 app.engine('ejs', ejsMate);
+
+const sessionOptions = {
+    secret : "mysupersecretcode",
+    resave : false ,
+    saveUninitialized : true,
+    cookie : {
+        expires : Date.now() + 1000*60*60*24*3,
+        maxAge : 1000 * 60 * 60 * 24 * 3 ,
+        httpOnly : true ,
+    },
+};
+app.use(session(sessionOptions));
 
 app.get("/",(req,res)=>{
     res.render("user/welcome.ejs");

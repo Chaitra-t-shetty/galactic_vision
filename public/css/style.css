@@ -238,3 +238,49 @@ body{
     }
 }
 
+/* Home Page */
+#hero {
+    background: url('../images/home.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    animation: backgroundMove 30s linear infinite;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  #hero h2 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease-out;
+  }
+
+  #hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  #hero button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    background-color: #f39c12;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  #hero button:hover {
+    background-color: #e67e22;
+  }
+  
