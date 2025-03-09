@@ -128,6 +128,19 @@ app.post("/signup" , wrapAsync( async(req,res) => {
     }
     
 }));
+
+
+app.get("/login",(req,res)=>{
+    res.render("users/login.ejs");
+});
+
+app.post("/login" , passport.authenticate("local",{failureRedirect:'/login' ,failureFlash:true}) , async(req,res) => {
+    req.flash("success","Welcome back to galactic vision");
+    res.redirect("/");
+    
+});
+
+
 app.all("*",(req,res,next)=>{
     next(new ExpressError(404,"Page Not Found"));
 });
