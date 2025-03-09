@@ -9,7 +9,11 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const flash = require("connect-flash");
 const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 main()
     .then(()=>{
@@ -40,6 +44,28 @@ const sessionOptions = {
     },
 };
 app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.success = req.flash("success");
+    next();
+})
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.get("/demouser" , async(req , res)=>{
+    let fakeUser = new User({
+        email : "student@gmail.com",
+        username : "delta-student"
+    });
+    let registeredUser = await User.register(fakeUser, "helloworld");
+    res.send(registeredUser);
+});
 
 app.get("/",(req,res)=>{
     res.render("user/welcome.ejs");
@@ -80,6 +106,28 @@ app.get("/quiz/:category",wrapAsync(async (req, res)=> {
         res.render("listings/quizPage", { quizQuestions, category });
 }));
 
+
+app.get("/signup",(req,res)=>{
+    res.render("users/signup.ejs");
+});
+
+//since wrapasync would redirect to a new page , so use try and catch
+app.post("/signup" , wrapAsync( async(req,res) => {
+
+    try{
+        let {username,email,password} = req.body;
+    //since these thing are not save to go in url
+    const newUser = new User({email , username});
+    const registeredUser = await User.register(newUser , password);
+    console.log(registeredUser);
+    req.flash("success","Welcome to galactic vision");
+    res.redirect("/");
+    } catch(e){
+        req.flash("error" , e.message);
+        res.redirect("/signup");
+    }
+    
+}));
 app.all("*",(req,res,next)=>{
     next(new ExpressError(404,"Page Not Found"));
 });
